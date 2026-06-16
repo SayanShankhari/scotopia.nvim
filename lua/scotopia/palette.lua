@@ -3,8 +3,8 @@ local M = {}
 -- Scopia Eye-Comfort Color Palette
 M.colors = {
   -- Backgrounds (Ultra-dark room optimization, no pure blacks)
-  bg             = "#0f0f0f" --"#1a1b26", -- Deep Tokyo Night base
-  bg_dark        = "#000000" -- "#16161e", -- Darker slate for statuslines/trees
+  bg             = "#0f0f0f", --"#1a1b26", -- Deep Tokyo Night base
+  bg_dark        = "#000000", -- "#16161e", -- Darker slate for statuslines/trees
   bg_highlight   = "#2f334d", -- Subtle visual selection highlight
 
   -- Text & Foregrounds
