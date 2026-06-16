@@ -1,1 +1,0 @@
-require("scopia").load()
