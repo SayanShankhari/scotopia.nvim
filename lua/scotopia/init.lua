@@ -1,16 +1,22 @@
+local palette = require ("scotopia.palette");
+local config = require ("scotopia.config");
+local highlights = require ("scotopia.highlights");
+
 local M = {}
 
--- internal storage config bucket
-local config = {
-  transparent = false
+-- module attached config
+-- preset config
+M.config = {
+  transparent = false,
+  italic_comments = true,
 }
 
 -- configurable setup function
-function M.setup (user_config)
+function M.setup (user_choices)
   -- merge user configs
-  config = vim.tbl_deep_extend ("force", config, user_config or {});
+  M.config = vim.tbl_deep_extend ("force", M.config, user_choices or {});
   -- trigger to run colors/scopia.lua
-  vim.cmd.colorscheme ("scotopia")
+  -- vim.cmd.colorscheme ("scotopia")
 end
 
 -- fallback default load function
@@ -29,8 +35,8 @@ function M.load()
   vim.g.colors_name = "scotopia"
 
   -- Pull in components
-  local palette = require ("scotopia.palette");
-  local highlights = require ("scotopia.highlights");
+--  local palette = require ("scotopia.palette");
+--  local highlights = require ("scotopia.highlights");
   -- setup theme
   highlights.setup (palette.colors);
 
@@ -39,5 +45,7 @@ function M.load()
   -- paint the screen using final config
   vim.api.nvim_set_hl (0, "Normal", { fg = "#a9b1d6", bg = bg_color });
 end
+
+
 
 return M
