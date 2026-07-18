@@ -1,3 +1,15 @@
+-- set up editor tab whitespace size
+-- Force 2-space indentation automatically for all Lua files in this project
+vim.api.nvim_create_autocmd ("FileType", {
+  pattern = "lua",
+  callback = function()
+    vim.bo.tabstop = 2      -- Width of a hard tab
+    vim.bo.shiftwidth = 2   -- Width of auto-indentation
+    vim.bo.expandtab = true -- Convert tabs into spaces
+  end,
+})
+
+-- main code begins here...
 local palette = require ("scotopia.palette");
 local config = require ("scotopia.config");
 local highlights = require ("scotopia.highlights");

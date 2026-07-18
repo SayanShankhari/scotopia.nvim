@@ -1,0 +1,32 @@
+{
+  "neovim": {
+    "options": {
+      "tabstop": 2,
+      "shiftwidth": 2,
+      "expandtab": true
+    }
+  },
+  "Lua.lsp": {
+    "settings": {
+      "Lua": {
+        "runtime": {
+          "version": "LuaJIT"
+        },
+        "diagnostics": {
+          "globals": [
+            "vim"
+          ]
+        },
+        "workspace": {
+          "library": [
+            "${3rd}/luv/library"
+          ],
+          "checkThirdParty": false
+        },
+        "format": {
+          "enable": false
+        }
+      }
+    }
+  }
+}
