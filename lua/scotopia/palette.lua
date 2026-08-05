@@ -1,9 +1,11 @@
-local hsl_to_xrgb = require ("scotopia.color_spaces").hsl_to_xrgb;
-local obj_dump = require ("scotopia.utils.obj_dump");
+--local hsl_to_xrgb = require ("scotopia.color_spaces").hsl_to_xrgb;
+--local utils = require ("scotopia.utils");
+local dump = require ("scotopia.utils.obj_dump");
+local catalogue = require ("colorlib.catalogue");
 
 local P = {};
 
-
+--[[
 P.defaults = {
   red = hsl_to_xrgb (0, 100, 50),
   orange = hsl_to_xrgb (30, 100, 50),
@@ -45,9 +47,109 @@ P.colors = {
   cyan           = "#94e2d5", -- sharp cyan - identifiers
   magenta        = "#f5c2e7", -- magenta - status messages
   gray           = "#6c7086", -- defaults
+  bg0 = '#0b0f14',
+  bg1 = '#11161d',
+  bg2 = '#1a2028',
+
+  fg0 = '#d8dee9',
+  fg1 = '#c0c8d8',
+  fg2 = '#8b93a6',
+
+  red    = '#f07178',
+  orange = '#ff9e64',
+  yellow = '#e6b450',
+  green  = '#aad94c',
+  cyan   = '#59c2ff',
+  blue   = '#6dcbfa',
+  purple = '#d2a6ff',
 }
+--]]
+
+--[[
+P.dark1 = {
+  red    = utils.make_palette ("#D05C6B");
+  orange = utils.make_palette ("#DD8C38");
+  yellow = utils.make_palette ("#C8AA46");
+  green  = utils.make_palette ("#54AF70");
+  cyan   = utils.make_palette ("#47A8B5");
+  blue   = utils.make_palette ("#5E95DE");
+  purple = utils.make_palette ("#9074D1");
+  pink   = utils.make_palette ("#D67EAE");
+}
+--]]
+--[[
+P.dark = {
+  red    = color.generate_variants ("#D05C6B");
+  orange = color.generate_variants ("#DD8C38");
+  yellow = color.generate_variants ("#C8AA46");
+  green  = color.generate_variants ("#54AF70");
+  cyan   = color.generate_variants ("#47A8B5");
+  blue   = color.generate_variants ("#5E95DE");
+  purple = color.generate_variants ("#9074D1");
+  pink   = color.generate_variants ("#D67EAE");
+}
+--]]
+
+--[[
+P.bg0 = '#0b0f14'
+P.bg1 = '#11161d'
+P.bg2 = '#1a2028'
+P.fg0 = '#d8dee9'
+P.fg1 = '#c0c8d8'
+P.fg2 = '#8b93a6'
+P.bg = "#2f2f2f"; -- dark background
+P.fg = "#a9b1d6"; -- dark background
+--]]
+
+--[[
+P.Color = {
+  red          = color.generate_variants (color.hsl_to_xrgb (0, 100, 50)),
+  orange       = color.generate_variants (color.hsl_to_xrgb (30, 100, 50)),
+  yellow       = color.generate_variants (color.hsl_to_xrgb (60, 100, 50)),
+  chartreuse   = color.generate_variants (color.hsl_to_xrgb (90, 100, 50)),
+  green        = color.generate_variants (color.hsl_to_xrgb (120, 100, 50)),
+  spring_green = color.generate_variants (color.hsl_to_xrgb (150, 100, 50)),
+  cyan         = color.generate_variants (color.hsl_to_xrgb (180, 100, 50)),
+  azure        = color.generate_variants (color.hsl_to_xrgb (210, 100, 50)),
+  blue         = color.generate_variants (color.hsl_to_xrgb (240, 100, 50)),
+  violet       = color.generate_variants (color.hsl_to_xrgb (270, 100, 50)),
+  indigo       = color.generate_variants (color.hsl_to_xrgb (275, 100, 50)),
+  magenta      = color.generate_variants (color.hsl_to_xrgb (300, 100, 50)),
+  rose         = color.generate_variants (color.hsl_to_xrgb (330, 100, 50)),
+}
+--]]
+
+-- background hierarchy
+P.bg0 = catalogue.dark_gray
+P.bg1 = catalogue.gray_900
+P.bg2 = catalogue.gray_800
+
+-- foreground hierarchy
+P.fg0 = catalogue.white
+P.fg1 = catalogue.gray_200
+P.fg2 = catalogue.gray_500
+
+-- accent colors
+P.red    = catalogue.red
+P.orange = catalogue.orange
+P.yellow = catalogue.yellow
+P.green  = catalogue.green
+P.cyan   = catalogue.cyan
+P.blue   = catalogue.blue
+P.purple = catalogue.purple
+P.pink   = catalogue.pink
 
 
-obj_dump (P);
+
+
+-- TEST:
+
+--local c = color.generate_variants ("#000000", { light_shift=0.5 });
+--print (c.dark, c.base, c.light, c.pale);
+
+
+--local dump = require ("colorlib.catalogue");
+--dump (P);
+
 
 return P;

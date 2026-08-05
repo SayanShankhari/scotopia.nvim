@@ -5,7 +5,6 @@ local U = {}
 -- 1. List all the sub-module files to search through
 local sub_modules = {
   "math_utils",
-  "color_utils",
 }
 
 -- 2. Define the automatic lookup behavior (Lazy load)

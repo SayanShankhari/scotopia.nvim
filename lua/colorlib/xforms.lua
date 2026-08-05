@@ -1,22 +1,16 @@
-local math_utils = require ("scotopia.utils.math_utils");
+-- =========================================================
+-- 1. CHANNEL & VALUE TRANSFORMATIONS
+-- =========================================================
+local mathx = require ("colorlib.mathx");
 
---- @class ColorUtils
---- @field normalize_channel fun(channel:number,bit_depth?:integer):number
---- @field quantize_channel fun(channel:number,bit_depth?:integer):number
---- @field normalize_rgb fun(r:number,g:number,b:number,bit_depth:integer):number,number,number
---- @field quantize_rgb fun(r:number,g:number,b:number,bit_depth:number):number,number,number
---- @field compress_gamma_math fun(channel:number):number
---- @field compress_gamma_fast fun(bit_depth:number,channel:number):number
---- @field compress_gamma_approx fun(channel:number):number
---- @field expand_gamma fun(channel:number):number
-local C = {};
+local T = {};
 
 
 -- Normalize channel to fixed range
 --- @param channel number [0-255/1023/65535]
 --- @param bit_depth number [8/10/16]
 --- @return number standard_channel_value [0-1]
-function C.normalize_channel (channel, bit_depth)
+function T.normalize_channel (channel, bit_depth)
   -- short-circuit to set default value
   bit_depth = bit_depth or 8;
   -- calculate max possible value
@@ -24,31 +18,35 @@ function C.normalize_channel (channel, bit_depth)
   -- normalize color channels
   local c = channel / max;
   if c < 0 then c = 0 elseif c > 1 then c = 1 end;
+print (channel, c);
   return c;
 end
 
---- @param bit_depth number [8/10/16]
 --- @param channel number [0-1]
+--- @param bit_depth number [8/10/16]
 --- @return number quantized_channel [0-255/1023/65535]
-function C.quantize_channel (channel, bit_depth)
+function T.quantize_channel (channel, bit_depth)
   -- short-circuit to set default value
   bit_depth = bit_depth or 8;
   -- core logic
   local max = 2 ^ bit_depth - 1;
-  return math_utils.round (channel * max);
+  return mathx.round (channel * max);
 end
 
 -- Normalize RGB channel to fixed range
 --- @param red number [0-255/1023/65535]
 --- @param green number [0-255/1023/65535]
 --- @param blue number [0-255/1023/65535]
---- @param bit_depth number [8/10/16]
+--- @param bit_depth? number [8/10/16]
 --- @return number standard_red [0-1]
 --- @return number standard_green [0-1]
 --- @return number standard_blue [0-1]
-function C.normalize_rgb (red, green, blue, bit_depth)
+function T.normalize_rgb (red, green, blue, bit_depth)
   -- short-circuit to set default value
   bit_depth = bit_depth or 8;
+  if bit_depth ~= 8 and bit_depth ~= 10 and bit_depth ~= 16 then
+    error ("invalid bit_depth");
+  end
   -- calculate max possible value
   local max = 2 ^ bit_depth - 1;
   -- normalize color channels
@@ -63,19 +61,22 @@ end
 --- @param red number [0-255/1023/65535]
 --- @param green number [0-255/1023/65535]
 --- @param blue number [0-255/1023/65535]
---- @param bit_depth number [8/10/16]
+--- @param bit_depth? number [8/10/16]
 --- @return number standard_red [0-1]
 --- @return number standard_green [0-1]
 --- @return number standard_blue [0-1]
-function C.quantize_rgb (red, green, blue, bit_depth)
+function T.quantize_rgb (red, green, blue, bit_depth)
   -- short-circuit to set default value
   bit_depth = bit_depth or 8;
+  if bit_depth ~= 8 and bit_depth ~= 10 and bit_depth ~= 16 then
+    error ("invalid bit_depth");
+  end
   -- calculate max possible value
   local max = 2 ^ bit_depth - 1;
   -- normalize color channels
-  local r = math_utils.round (red * max);
-  local g = math_utils.round (green * max);
-  local b = math_utils.round (blue * max);
+  local r = mathx.round (red * max);
+  local g = mathx.round (green * max);
+  local b = mathx.round (blue * max);
 
   return r, g, b;
 end
@@ -83,7 +84,7 @@ end
 -- apply/correct gamma curve on linear color value
 --- @param channel number [0-1] normalized channel value
 --- @return number perceived_non_linear_value
-function C.compress_gamma_math (channel)
+function T.compress_gamma_math (channel)
   if channel <= 0.0031308 then
     return channel * 12.92;
   else
@@ -124,14 +125,14 @@ populate_GLUT();
 --- @param bit_depth number [8/10/16]
 --- @param channel number [0-1]
 --- @return number gamma_corrected_channel [0-1]
-function C.compress_gamma_fast (bit_depth, channel)
+function T.compress_gamma_fast (bit_depth, channel)
   -- 1. Clamp input strictly to [0-1] to prevent floating-point overruns
   if channel < 0 then channel = 0 elseif channel > 1 then channel = 1 end
   -- 2. Execute pipeline based on bit depth
   if bit_depth == 8 or bit_depth == 10 then
-    return GLUT [bit_depth][C.quantize_channel (bit_depth, channel)];
+    return GLUT [bit_depth][T.quantize_channel (bit_depth, channel)];
   elseif bit_depth == 16 then
-    return C.compress_gamma_math (channel);
+    return T.compress_gamma_math (channel);
   else
     error ("Wrong bit_depth, provide only 8, 10 or 16");
   end
@@ -140,7 +141,7 @@ end
 -- square root approximation curve, visually unnoticeable
 --- @param channel number [0-1]
 --- @return number gamma_corrected_channel [0-1]
-C.compress_gamma_approx = function (channel)
+T.compress_gamma_approx = function (channel)
   if channel <= 0.0031308 then
     return channel * 12.92;
   else
@@ -153,7 +154,7 @@ end
 -- revoke Gamma curve (non-linear) to get linear value
 --- @param channel number [0-1] normalized channel value
 --- @return number linear_value [0-1]
-function C.expand_gamma (channel)
+function T.expand_gamma (channel)
   -- 0.0031308 * 12.92 = 0.040449936 ≈ 0.04045
   if channel <= 0.04045 then
     return channel / 12.92;
@@ -163,21 +164,4 @@ function C.expand_gamma (channel)
 end
 
 
--- metatable/blueprint
-C.MetaMethods = {
-  normalize_channel = function (self, bit_depth)
-    return C.normalize_channel (self._value, bit_depth);
-  end,
-  quantize_channel = function (self, bit_depth)
-    return C.quantize_channel (self._value, bit_depth);
-  end,
-}
-
-setmetatable (C, {
-  __call = function (_, value)
-    return setmetatable ({ _value = value }, C.MetaMethods);
-  end
-});
-
-
-return C;
+return T;

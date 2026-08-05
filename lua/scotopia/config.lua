@@ -22,4 +22,33 @@ local default_configs = {
   transparent_mode = false,
 }
 
-return default_configs
+
+local M = {}
+
+M.options = {
+  transparent = false,
+  dim_inactive = false,
+  styles = {
+    comments = { italic = true },
+    keywords = { italic = false },
+    functions = { bold = false },
+  },
+}
+
+M.defaults = {
+  transparent = false,
+  italics = {
+    comments = true,
+    keywords = false,
+  },
+  dim_inactive = false,
+}
+
+M.options = vim.deepcopy (M.defaults)
+
+function M.setup(opts)
+  M.options = vim.tbl_deep_extend ('force', M.defaults, opts or {});
+end
+
+
+return M;

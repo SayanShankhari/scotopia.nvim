@@ -37,8 +37,27 @@ local function obj_dump (object, label, indent, visited)
     obj_dump (value, key_string, indent + 2, visited);
   end
 
+--[[
+  -- METATABLE
+  -- 2. Capture and dump the Metatable (if present)
+  local mt = getmetatable (object)
+  if mt then
+    --print (indent .. " [ MetaTable / __index ] =");
+    -- If __index points to a table (like Core), inspect that table's functions
+    local target = (type (mt.__index) == "table") and mt.__index or mt;
+    indent = 2;
+    whitespace = string.rep (" ", indent);
+    print (whitespace .. "Metatable: {");
+    for k, v in pairs (target) do
+      print (whitespace .. "    " .. tostring(k) .. " = " .. tostring(v));
+    end
+    print (whitespace .. "  }");
+  end
+--]]
   print (whitespace .. "}");
 end
+
+
 
 --[[
 -- test
