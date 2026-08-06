@@ -12,25 +12,38 @@ vim.api.nvim_create_autocmd ("FileType", {
 
 local highlights = require ("scotopia.highlights");
 local plugins = require ("scotopia.plugins");
+local configs = require ("scotopia.configs");
+local specs = require ("scotopia.specs");
+--local dump = require ("scotopia.utils.obj_dump");
 
 local M = {};
 
 -- Default plugin configuration
-M.config = require ("scotopia.config");
+M.config_options = configs.defaults;
+M.color_specs = specs.default_specs;
 
 -- Merge user options and initialize the plugin
----@param opts table|nil User configuration "options"
-function M.setup (opts, spec)
-  local opts_tbl = type(opts) == "function" and opts (spec) or (opts or {});
-  M.config = vim.tbl_deep_extend ("force", M.config, opts_tbl);
+--- @param user_configs table|nil User configuration "options"
+--- @param user_colors table|nil Optional custom spec overrides
+function M.setup (user_configs, user_colors)
+  --print ("setup called...");
+  -- set the config user overrides
+  local final_configs = type (user_configs) == "function" and user_configs () or (user_configs or {});
+  M.config_options = vim.tbl_deep_extend ("force", M.config_options, final_configs);
+
+  -- set the color-specs user overrides
+  -- 2. generate safe 2-level sanitized specs proxy
+  M.color_specs = specs.sanitize (user_colors);
+
   -- trigger to run colors/scopia.lua
   -- vim.cmd.colorscheme ("scotopia")
 --  require("scotopia.config").setup(opts);
 end
 
 -- default load function
--- :colorscheme ("scotopia")
+-- called by colors/scotopia.lua or :colorscheme scotopia
 function M.load()
+  --print ("load called...");
   -- 1. reset existing...
   -- clear existing highlights
   if vim.g.colors_name then
@@ -41,15 +54,39 @@ function M.load()
     vim.cmd ("syntax reset");
   end
 
-  -- register the new theme identity
+  -- register theme identity
   vim.g.colors_name = "scotopia";
+
+  -- to enable many color features
   vim.o.termguicolors = true;
 
-  local groups = {};
-  vim.tbl_extend ("force", groups, highlights(), plugins());
+  -- dump (M.color_specs, "color_specs");
+  -- dump (highlights (M.color_specs), "highlights");
+  -- dump (plugins (M.color_specs), "plugins");
+
+  -- combine all the highlight-groups
+  local highlight_groups = vim.tbl_deep_extend (
+    "force",
+    {},
+    highlights (M.color_specs, M.config_options) or {},
+    plugins (M.color_specs, M.config_options) or {}
+  );
+
   -- apply all the final highlight groups
-  for group, spec in pairs (groups) do
-    vim.api.nvim_set_hl (0, group, spec);
+  for hl_group, hl_spec in pairs (highlight_groups) do
+    vim.api.nvim_set_hl (0, hl_group, hl_spec);
+  end
+
+-- 3. Set terminal colors if enabled in config
+  if M.config_options.terminal_colors then
+    vim.g.terminal_color_0 = M.color_specs.ui.bg
+    vim.g.terminal_color_1 = M.color_specs.diag.error
+    vim.g.terminal_color_2 = M.color_specs.diag.ok
+    vim.g.terminal_color_3 = M.color_specs.diag.warn
+    vim.g.terminal_color_4 = M.color_specs.ui.accent
+    vim.g.terminal_color_5 = M.color_specs.syntax.keyword
+    vim.g.terminal_color_6 = M.color_specs.syntax.special
+    vim.g.terminal_color_7 = M.color_specs.ui.fg
   end
 end
 

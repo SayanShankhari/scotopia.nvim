@@ -1,16 +1,17 @@
-local specs = require ("scotopia.specs");
-
-return function()
+-- Controls built-in popup menus and command line completion (wildmenu).
+return function (specs, _)
   return {
-    Pmenu      = { fg = specs.popupmenu.foreground, bg = specs.popupmenu.background },
---    PmenuSel   = { fg = specs.popupmenu.selection_foreground, bg = specs.selection.background },
---    PmenuSbar  = { bg = specs.popupmenu.selection_bar },
---    PmenuThumb = { bg = specs.popupmenu.thumb },
---[[
-  paint ("Pmenu", { fg = colors.foreground, bg = colors.background })
-  paint ("PmenuSel", { fg = colors.background, bg = colors.orange })
-  paint ("PmenuSbar", { bg = colors.selection })
-  paint ("PmenuThumb", { bg = colors.orange })
---]]
-  }
+    -- Native Popup Menu
+    Pmenu         = { fg = specs.popupmenu.fg    , bg = specs.popupmenu.bg },
+    PmenuSel      = { fg = specs.popupmenu.fg_sel, bg = specs.popupmenu.bg_sel, bold = true },
+    PmenuKind     = { fg = specs.popupmenu.kind  , bg = specs.popupmenu.bg },
+    PmenuKindSel  = { fg = specs.popupmenu.kind  , bg = specs.popupmenu.bg_sel },
+    PmenuExtra    = { fg = specs.popupmenu.extra , bg = specs.popupmenu.bg },
+    PmenuExtraSel = { fg = specs.popupmenu.extra , bg = specs.popupmenu.bg_sel },
+    PmenuSbar     = { bg = specs.popupmenu.bg_sbar },
+    PmenuThumb    = { bg = specs.popupmenu.bg_thumb },
+
+    -- Native WildMenu
+    WildMenu = { fg = specs.popupmenu.fg_sel, bg = specs.popupmenu.bg_sel },
+  };
 end

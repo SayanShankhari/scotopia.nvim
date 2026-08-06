@@ -1,4 +1,6 @@
-local default_configs = {
+local C = {};
+
+C.default_configs = {
   terminal_colors = true,
   undercurl = true,
   underline = true,
@@ -22,10 +24,7 @@ local default_configs = {
   transparent_mode = false,
 }
 
-
-local M = {}
-
-M.options = {
+C.options = {
   transparent = false,
   dim_inactive = false,
   styles = {
@@ -35,20 +34,26 @@ M.options = {
   },
 }
 
-M.defaults = {
+C.defaults = {
   transparent = false,
   italics = {
     comments = true,
     keywords = false,
   },
+  bold = {
+    comments = false,
+    keywords = true,
+  },
   dim_inactive = false,
+  terminal_colors = true,
+  undercurl = true,
+  override_specs = {},
 }
 
-M.options = vim.deepcopy (M.defaults)
+C.options = vim.deepcopy (C.defaults)
 
-function M.setup(opts)
-  M.options = vim.tbl_deep_extend ('force', M.defaults, opts or {});
+function C.setup (opts)
+  C.options = vim.tbl_deep_extend ('force', C.defaults, opts or {});
 end
 
-
-return M;
+return C;
