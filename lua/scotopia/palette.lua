@@ -1,7 +1,6 @@
---local hsl_to_xrgb = require ("scotopia.color_spaces").hsl_to_xrgb;
---local utils = require ("scotopia.utils");
-local dump = require ("scotopia.utils.obj_dump");
-local catalogue = require ("colorlib.catalogue");
+--local dump = require ("scotopia.utils.obj_dump");
+local colorlib = require ("colorlib");
+local catalogue = colorlib.catalogue;
 
 local P = {};
 
