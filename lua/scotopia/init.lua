@@ -11,22 +11,22 @@ vim.api.nvim_create_autocmd ("FileType", {
 
 
 local highlights = require ("scotopia.highlights");
-local plugins = require ("scotopia.plugins");
-local configs = require ("scotopia.configs");
-local specs = require ("scotopia.specs");
---local dump = require ("scotopia.utils.obj_dump");
+local plugins    = require ("scotopia.plugins");
+local configs    = require ("scotopia.configs");
+local specs      = require ("scotopia.specs");
+--local dump     = require ("scotopia.utils.obj_dump");
 
 local M = {};
 
 -- Default plugin configuration
 M.config_options = configs.defaults;
-M.color_specs = specs.default_specs;
+M.color_specs = specs.defaults;
+M.user_variant = nil;
 
 -- Merge user options and initialize the plugin
 --- @param user_configs table|nil User configuration "options"
 --- @param user_colors table|nil Optional custom spec overrides
 function M.setup (user_configs, user_colors)
-  --print ("setup called...");
   -- set the config user overrides
   local final_configs = type (user_configs) == "function" and user_configs () or (user_configs or {});
   M.config_options = vim.tbl_deep_extend ("force", M.config_options, final_configs);
@@ -42,8 +42,13 @@ end
 
 -- default load function
 -- called by colors/scotopia.lua or :colorscheme scotopia
-function M.load()
-  --print ("load called...");
+function M.load (variant_info)
+  local variant_name = nil;
+  if type (variant_info) == "table" and variant_info.variant == "mahogany" then
+    M.color_specs = specs.mahogany;
+    variant_name = variant_info.variant;
+  end;
+
   -- 1. reset existing...
   -- clear existing highlights
   if vim.g.colors_name then
@@ -56,6 +61,9 @@ function M.load()
 
   -- register theme identity
   vim.g.colors_name = "scotopia";
+  if type (variant_name) == "string" then
+    vim.g.colors_name = "scotopia_" .. variant_name;
+  end
 
   -- to enable many color features
   vim.o.termguicolors = true;
@@ -94,5 +102,6 @@ end
 function M.inspect_group (naam)
   print (vim.inspect (vim.api.nvim_get_hl (0, { name = naam })));
 end
+
 
 return M;
