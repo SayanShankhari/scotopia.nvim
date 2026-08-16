@@ -1,0 +1,125 @@
+return {
+  metadata = {
+    name = "hazelnut",
+    type = "Hazelnut / Chestnut / Amber Wood",
+  },
+  ui = {
+    fg             = "#231B15", -- Deep Mahogany Charcoal
+    fg_dim         = "#544336", -- Dark Timber
+    fg_gutter      = "#8F7B6B", -- Clear Wood Gutter Numbers
+    fg_subtle      = "#6B584A", -- Solid Secondary Text
+    bg             = "#EFE3CD", -- Warm Muted Amber Canvas (Glare-Reduced)
+    bg_dim         = "#E4D6BD", -- Deeper Amber Wood Panel
+    bg_subtle      = "#D9CAA8", -- Accent Surface
+    bg_cursorline  = "#E5D8BE", -- Clear Line Highlight
+    bg_float       = "#E4D6BD", -- Floating Window Base
+    bg_statusline  = "#E4D6BD", -- Status Bar Base
+    cursor         = "#0369A1", -- Deep Cyan Cursor
+    selection      = "#D4C2A1", -- Toasted Amber Selection
+    border         = "#AA947A", -- Warm Timber Border
+    border_float   = "#C2410C", -- Deep Amber Orange Accent Border
+    accent         = "#C2410C", -- Deep Amber Orange
+    search_bg      = "#FCE7F3", -- Highlight Base
+    search_match   = "#BE123C", -- Bold Crimson Flash
+  },
+  diag = {
+    error    = "#B91C1C", -- Deep Crimson Red
+    warn     = "#B45309", -- Deep Amber Ochre
+    info     = "#0369A1", -- Deep Cyan
+    hint     = "#15803D", -- Deep Forest Green
+    ok       = "#15803D", -- Deep Forest Green
+    error_bg = "#E9CFCF", -- Toasted Tint
+    warn_bg  = "#E9DAC3", -- Toasted Tint
+    info_bg  = "#D5E2EC", -- Toasted Tint
+    hint_bg  = "#D7E4D8", -- Toasted Tint
+    ok_bg    = "#D7E4D8", -- Toasted Tint
+  },
+  diff = {
+    add       = "#15803D", -- Deep Forest Green
+    delete    = "#B91C1C", -- Deep Crimson Red
+    modify    = "#B45309", -- Deep Amber Ochre
+    conflict  = "#7C2D12", -- Deep Timber Brown
+    untrack   = "#6B584A", -- Solid Secondary Text
+    ignore    = "#6B584A", -- Solid Secondary Text
+    stage     = "#15803D", -- Deep Forest Green
+    add_bg    = "#D7E4D8", -- Toasted Tint
+    add_fg    = "#15803D", -- Deep Forest Green
+    change_bg = "#D5E2EC", -- Toasted Tint
+    change_fg = "#0369A1", -- Deep Cyan
+    delete_bg = "#E9CFCF", -- Toasted Tint
+    delete_fg = "#B91C1C", -- Deep Crimson Red
+    text_bg   = "#DFD3E7", -- Toasted Amethyst Tint
+    text_fg   = "#231B15", -- Deep Mahogany
+  },
+  syntax = {
+    comment         = "#6B584A", -- Deep Timber Slate
+    special_comment = "#544336", -- Dark Timber Slate
+    constant        = "#5B21B6", -- Deep Indigo-Purple
+    number          = "#881337", -- Deep Burgundy Pink
+    boolean         = "#881337", -- Deep Burgundy Pink
+    string          = "#14532D", -- Thick Forest Green
+    character       = "#14532D", -- Thick Forest Green
+    variable        = "#231B15", -- Heavy Mahogany Base Text
+    builtin         = "#0369A1", -- Deep Cyan
+    parameter       = "#231B15", -- Heavy Mahogany Base Text
+    property        = "#1E1B4B", -- Midnight Indigo (High contrast key names)
+    preproc         = "#7C2D12", -- Deep Burnt Mahogany
+    special         = "#365314", -- Deep Olive
+    fn              = "#0369A1", -- Deep Cyan
+    keyword         = "#9A3412", -- Bold Burnt Amber
+    macro           = "#7C2D12", -- Deep Burnt Mahogany
+    operator        = "#991B1B", -- Deep Crimson
+    delimiter       = "#991B1B", -- Deep Crimson
+    type            = "#854D0E", -- Deep Earth Ochre
+    tag             = "#991B1B", -- Deep Crimson
+    identifier      = "#231B15", -- Heavy Mahogany Base Text
+    statement       = "#9A3412", -- Bold Burnt Amber
+    conditional     = "#9A3412", -- Bold Burnt Amber
+    error           = "#991B1B", -- Deep Crimson
+    todo            = "#9A3412", -- Bold Burnt Amber
+  },
+  popupmenu = {
+    fg       = "#231B15", -- Deep Mahogany Text
+    fg_sel   = "#000000", -- Pure Black Text
+    bg       = "#E4D6BD", -- Panel Base
+    bg_sel   = "#D4C2A1", -- Toasted Amber Selection
+    kind     = "#0369A1", -- Deep Cyan
+    extra    = "#6B584A", -- Solid Secondary Text
+    bg_sbar  = "#D9CAA8", -- Accent Surface
+    bg_thumb = "#AA947A", -- Warm Timber Thumb
+  },
+  completion = {
+    item       = "#231B15", -- Deep Mahogany
+    match      = "#9A3412", -- Bold Burnt Amber
+    detail     = "#6B584A", -- Solid Secondary Text
+    deprecated = "#6B584A", -- Solid Secondary Text
+    snippet    = "#881337", -- Deep Burgundy Pink
+    fg         = "#544336", -- Dark Timber
+    accent     = "#854D0E", -- Deep Earth Ochre
+    comment    = "#E4D6BD", -- Panel Base
+  },
+  treeview = {
+    fg             = "#231B15", -- Deep Mahogany
+    bg             = "#E4D6BD", -- Panel Base
+    title          = "#9A3412", -- Bold Burnt Amber
+    icon           = "#0369A1", -- Deep Cyan
+    folder         = "#7C2D12", -- Deep Timber Brown
+    folder_open    = "#9A3412", -- Bold Burnt Amber
+    dir_name       = "#1E1B4B", -- Midnight Indigo
+    dir_icon       = "#1E1B4B", -- Midnight Indigo
+    file_name      = "#231B15", -- Deep Mahogany
+    file_icon      = "#231B15", -- Deep Mahogany
+    file_opened    = "#14532D", -- Thick Forest Green
+    indent_marker = "#EFE3CD", -- Base Amber Canvas
+    expander      = "#6B584A", -- Solid Secondary Text
+    root_name      = "#0369A1", -- Deep Cyan
+  },
+  keymap = {
+    key    = "#9A3412", -- Bold Burnt Amber
+    group  = "#1E1B4B", -- Midnight Indigo
+    desc   = "#231B15", -- Deep Mahogany
+    accent = "#7C2D12", -- Deep Timber Brown
+    fg     = "#881337", -- Deep Burgundy Pink
+    border = "#231B15", -- Deep Mahogany
+  },
+};
