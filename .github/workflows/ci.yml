@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  stylua:
+    name: Code Formatting (StyLua)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run StyLua
+        uses: JohnnyMorganz/stylua-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --check .
+
+  tests:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        neovim_version: [stable, nightly]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Neovim (${{ matrix.neovim_version }})
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: ${{ matrix.neovim_version }}
+
+      - name: Run Plenary Tests
+        run: tests/run.sh
