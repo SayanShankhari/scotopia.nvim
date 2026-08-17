@@ -35,4 +35,6 @@ jobs:
           version: ${{ matrix.neovim_version }}
 
       - name: Run Plenary Tests
-        run: tests/run.sh
+        run: |
+          chmod +x tests/run.sh
+          tests/run.sh
