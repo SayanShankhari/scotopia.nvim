@@ -37,4 +37,4 @@ jobs:
       - name: Run Plenary Tests
         run: |
           chmod +x tests/run.sh
-          tests/run.sh
+          sh tests/run.sh
