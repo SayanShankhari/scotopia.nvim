@@ -1,0 +1,19 @@
+name: Feature / Plugin Support Request
+description: Request a new plugin highlight integration or theme option.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: plugin-request
+    attributes:
+      label: Plugin / Feature Name
+      description: Which plugin or feature would you like scotopia.nvim to support?
+      placeholder: e.g., Telescope, Nvim-Tree, Lualine, Treesitter
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Motivation & Details
+      description: Why would this be a useful addition to the theme?
+    validations:
+      required: false
