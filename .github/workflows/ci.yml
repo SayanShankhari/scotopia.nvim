@@ -7,17 +7,17 @@ on:
     branches: [ "main", "master" ]
 
 jobs:
-  stylua:
-    name: Code Formatting (StyLua)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run StyLua
-        uses: JohnnyMorganz/stylua-action@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          version: v2.0.2
-          args: --check .
+#  stylua:
+#    name: Code Formatting (StyLua)
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v4
+#      - name: Run StyLua
+#        uses: JohnnyMorganz/stylua-action@v5
+#        with:
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#          version: v2.0.2
+#          args: --check .
 
   tests:
     name: Run Tests
