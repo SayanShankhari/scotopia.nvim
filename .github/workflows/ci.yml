@@ -27,7 +27,7 @@ jobs:
       matrix:
         neovim_version: [stable, nightly]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install Neovim (${{ matrix.neovim_version }})
         uses: rhysd/action-setup-vim@v1
