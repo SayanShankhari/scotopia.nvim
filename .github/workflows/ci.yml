@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run StyLua
-        uses: JohnnyMorganz/stylua-action@v4
+        uses: JohnnyMorganz/stylua-action@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: v2.0.2
@@ -27,7 +27,7 @@ jobs:
       matrix:
         neovim_version: [stable, nightly]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
 
       - name: Install Neovim (${{ matrix.neovim_version }})
         uses: rhysd/action-setup-vim@v1
