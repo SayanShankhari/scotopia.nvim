@@ -13,9 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run StyLua
-        uses: JohnnyMorganz/stylua-action@v1
+        uses: JohnnyMorganz/stylua-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          version: v2.0.2
           args: --check .
 
   tests:
