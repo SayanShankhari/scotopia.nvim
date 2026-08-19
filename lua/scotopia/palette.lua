@@ -140,6 +140,28 @@ P.pink   = catalogue.pink
 
 
 
+P.fg = "#E8DFD8";
+P.bg = "#0F1115";
+
+P.black   = "#0F1115";
+P.red     = "#F76C6C";
+P.green   = "#98C379";
+P.yellow  = "#FACC15";
+P.blue    = "#8EA0C2";
+P.magenta = "#E54888";
+P.cyan    = "#38BDF8";
+P.white   = "#E8DFD8";
+
+P.bright_black   = nil;
+P.bright_red     = nil;
+P.bright_green   = nil;
+P.bright_yellow  = nil;
+P.bright_blue    = nil;
+P.bright_magenta = nil;
+P.bright_cyan    = nil;
+P.bright_white   = nil;
+
+
 
 -- TEST:
 

@@ -1,0 +1,29 @@
+# Scotopia theme for Alacritty Terminal
+
+[colors.primary]
+background = "#0F1115"
+foreground = "#E8DFD8"
+
+[colors.cursor]
+text   = "#0F1115"
+cursor = "#E8DFD8"
+
+[colors.normal]
+black   = "#0F1115"
+red     = "#F76C6C"
+green   = "#98C379"
+yellow  = "#FACC15"
+blue    = "#8EA0C2"
+magenta = "#E54888"
+cyan    = "#38BDF8"
+white   = "#E8DFD8"
+
+[colors.bright]
+black   = "#0F1115"
+red     = "#F76C6C"
+green   = "#98C379"
+yellow  = "#FACC15"
+blue    = "#8EA0C2"
+magenta = "#E54888"
+cyan    = "#38BDF8"
+white   = "#E8DFD8"
