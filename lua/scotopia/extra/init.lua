@@ -23,39 +23,58 @@ local function get_project_root()
 end
 
 local extras = {
+  -- should match the module name
   alacritty = {
     ext = "toml",
     url = "https://github.com/alacritty/alacritty",
     label = "Alacritty",
-    content = require ("lua.scotopia.extra.alacritty"),
   },
   kitty = {
     ext = "conf",
     url = "https://sw.kovidgoyal.net/kitty/conf.html",
     label = "Kitty",
-    content = require ("lua.scotopia.extra.kitty"),
   },
---[[
-  konsole = {
-    ext = "colorscheme",
-    url = "https://konsole.kde.org/",
-    label = "Konsole",
-    content = nil,
-  },
---]]
 };
 
 function M.build()
   local root_dir = get_project_root();
-  for extra_name, extra_info in pairs (extras) do
-    if extra_info.content then
-      local extra_file = extra_name .. "." .. extra_info.ext;
-      vim.fn.mkdir ("extras", "p");
-      write_file (root_dir .. "/extras/" .. extra_file, extra_info.content);
-      print ("Generated extra: " .. extra_file);
-    end
+  local colors  = require ("scotopia.palette").extras;
+
+  for target, info in pairs (extras) do
+    local target_module = require ("scotopia.extra." .. target);
+    if not module then goto continue end;
+    local content = target_module.generate (colors);
+
+    local dir_path = root_dir .. "/extras";
+    vim.fn.mkdir (dir_path, "p");
+    local file_name = string.format ("%s.%s", target, info.ext);
+    local file_path = dir_path .. "/" .. file_name;
+
+    write_file (file_path, content);
+    print ("Generated config file for extra: " .. target);
+
+    ::continue:: -- label for missing continue keyword
   end
 end
+
+--[[
+alternative for goto continue
+inside loop use repeat untill block with breaks
+
+  repeat
+    ...statements
+    if false then break end;
+    ...statements
+  untill true
+
+or use a simple if check
+
+  ...statements
+  if true then
+    ...nested statements
+  end
+  ...statements
+--]]
 
 --[[
 local Util = require("tokyonight.util")

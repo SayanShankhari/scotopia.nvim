@@ -1,40 +1,43 @@
-local palette = require ("scotopia.palette");
+local M = {}
 
-return string.format ([[
-# Scotopia theme for Alacritty Terminal
+local template = [[
+# ------------------------------------------------
+# Alacritty Colors
+# Theme: Scotopia
+# Source: https://github.com/alacritty/alacritty
+# ------------------------------------------------
 
 [colors.primary]
-background = "%s"
-foreground = "%s"
+background = "${bg}"
+foreground = "${fg}"
 
 [colors.cursor]
-text   = "%s"
-cursor = "%s"
+text   = "${bg}"
+cursor = "${fg}"
 
 [colors.normal]
-black   = "%s"
-red     = "%s"
-green   = "%s"
-yellow  = "%s"
-blue    = "%s"
-magenta = "%s"
-cyan    = "%s"
-white   = "%s"
+black   = "${black}"
+red     = "${red}"
+green   = "${green}"
+yellow  = "${yellow}"
+blue    = "${blue}"
+magenta = "${magenta}"
+cyan    = "${cyan}"
+white   = "${white}"
 
 [colors.bright]
-black   = "%s"
-red     = "%s"
-green   = "%s"
-yellow  = "%s"
-blue    = "%s"
-magenta = "%s"
-cyan    = "%s"
-white   = "%s"
-]],
-  palette.bg, palette.fg,
-  palette.bg, palette.fg,
-  palette.black, palette.red, palette.green, palette.yellow, palette.blue, palette.magenta, palette.cyan, palette.white,
-  palette.bright_black or palette.black, palette.bright_red or palette.red, palette.bright_green or palette.green,
-  palette.bright_yellow or palette.yellow, palette.bright_blue or palette.blue, palette.bright_magenta or palette.magenta,
-  palette.bright_cyan or palette.cyan, palette.bright_white or palette.white
-);
+black   = "${bright_black}"
+red     = "${bright_red}"
+green   = "${bright_green}"
+yellow  = "${bright_yellow}"
+blue    = "${bright_blue}"
+magenta = "${magenta}"
+cyan    = "${cyan}"
+white   = "${white}"
+]];
+
+function M.generate (colors)
+  return (template:gsub ("%${([%w_]+)}", function(key) return colors[key] or "" end));
+end
+
+return M;

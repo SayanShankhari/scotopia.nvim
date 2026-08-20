@@ -162,6 +162,90 @@ P.bright_cyan    = nil;
 P.bright_white   = nil;
 
 
+P.warm_mountain_mist    = "#E8DFD8";
+P.muted_weathered_stone = "#A89A90";
+P.deep_dark_mahogany    = "#3E3029";
+P.smoked_timber_ash     = "#6B584C";
+P.dark_mahogany         = "#100C0A";
+P.dark_roasted_timber   = "#161210";
+P.deep_mahogany         = "#1E1815";
+P.subtle_line_glow      = "#181311";
+P.light_electric_cyan   = "#38BDF8";
+P.dark_roasted_highlight= "#2B1E19";
+P.warm_apricot_orange   = "#FF9E64";
+P.deep_wine_highlight   = "#3A1E18";
+P.coral_red             = "#F76C6C";
+P.meadow_green          = "#98C379";
+P.dark_red_tint         = "#261212";
+P.dark_amber_tint       = "#24190E";
+P.dark_blue_tint        = "#0E1E22";
+P.dark_green_tint       = "#121F13";
+P.timber_brown          = "#B8835A";
+P.dark_meadow_tint      = "#142215";
+P.dark_cobalt_tint      = "#0E1B28";
+P.dark_berry_tint       = "#281214";
+P.dark_amethyst_tint    = "#231628";
+P.soft_bark_slate       = "#887A74";
+P.amethyst_purple       = "#C678DD";
+P.soft_dusk_indigo      = "#8EA0C2";
+P.neon_lime             = "#A3F853";
+P.sunlight_gold         = "#FACC15";
+P.pure_white            = "#FFFFFF";
+
+P.deep_mahogany_charcoal = "#231B15";
+P.dark_timber            = "#544336";
+P.clear_wood             = "#8F7B6B";
+P.solid_secondary        = "#6B584A";
+P.warm_muted_amber       = "#EFE3CD";
+P.accent_surface         = "#D9CAA8";
+P.clear_line_highlight   = "#E5D8BE";
+P.floating_window_base   = "#E4D6BD";
+P.deep_cyan              = "#0369A1";
+P.toasted_amber          = "#D4C2A1";
+P.warm_timber            = "#AA947A";
+P.deep_amber_orange      = "#C2410C";
+P.highlight_base         = "#FCE7F3";
+P.bold_crimson_flash     = "#BE123C";
+P.deep_crimson_red       = "#B91C1C";
+P.deep_amber_ochre       = "#B45309";
+P.deep_forest_green      = "#15803D";
+P.toasted_tint           = "#E9DAC3";
+P.deep_timber_brown      = "#7C2D12";
+P.toasted_amethyst_tint  = "#DFD3E7";
+P.deep_indigo            = "#5B21B6";
+P.deep_burgundy_pink     = "#881337";
+P.thick_forest_green     = "#14532D";
+P.midnight_indigo        = "#1E1B4B";
+P.deep_olive             = "#365314";
+P.bold_burnt_amber       = "#9A3412";
+P.deep_crimson           = "#991B1B";
+P.deep_earth_ochre       = "#854D0E";
+P.pure_black_text        = "#000000";
+
+
+P.extras = {
+  fg = "#EFE3CD",
+  bg = "#0F1115",
+
+  black   = "#0F1115",
+  red     = "#B91C1C",
+  green   = "#14532D",
+  yellow  = "#FACC15",
+  blue    = "#1E1B4B",
+  magenta = "#BE123C",
+  cyan    = "#0369A1",
+  white   = "#EFE3CD",
+
+  bright_black   = "#0F1115",
+  bright_red     = "#F76C6C",
+  bright_green   = "#98C379",
+  bright_yellow  = "#FACC15",
+  bright_blue    = "#8EA0C2",
+  bright_magenta = "#E54888",
+  bright_cyan    = "#38BDF8",
+  bright_white   = "#E8DFD8",
+};
+
 
 -- TEST:
 

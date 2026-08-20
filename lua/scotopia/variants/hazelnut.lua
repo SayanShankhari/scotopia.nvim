@@ -110,8 +110,8 @@ return {
     file_name      = "#231B15", -- Deep Mahogany
     file_icon      = "#231B15", -- Deep Mahogany
     file_opened    = "#14532D", -- Thick Forest Green
-    indent_marker = "#EFE3CD", -- Base Amber Canvas
-    expander      = "#6B584A", -- Solid Secondary Text
+    indent_marker  = "#EFE3CD", -- Base Amber Canvas
+    expander       = "#6B584A", -- Solid Secondary Text
     root_name      = "#0369A1", -- Deep Cyan
   },
   keymap = {
